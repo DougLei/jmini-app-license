@@ -22,6 +22,7 @@ public abstract class LicenseFile {
 	 * 设置签名信息
 	 */
 	public void setSign(SignatureHandler signatureHandler) {
+		System.out.println(signatureHandler.sign(content.toString()));
 		add(LicenseKeyConstants.KEY_SIGNATURE, signatureHandler.sign(content.toString()));
 	}
 	

@@ -11,7 +11,7 @@ import com.douglei.mini.app.license.file.LicenseFile;
  * @author DougLei
  */
 class LicenseFileWriter {
-	private final int privateKey = 0xab;
+	private final int privateKey = 0xAB;
 	private File file;
 	
 	public LicenseFileWriter() {
@@ -31,8 +31,7 @@ class LicenseFileWriter {
 			for (byte lb : line.getBytes()) {
 				fos.write(lb^privateKey);
 			}
-			fos.write('\r'^privateKey);
-			fos.write('\n'^privateKey);
+			fos.write('\t'^privateKey);
 		}
 		fos.close();
 	}

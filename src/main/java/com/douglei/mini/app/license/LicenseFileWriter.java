@@ -11,8 +11,7 @@ import com.douglei.mini.app.license.file.LicenseFile;
  * @author DougLei
  */
 class LicenseFileWriter {
-	private final int privateKey = 0x66;
-	private final byte[] newLine = {'\r', '\n'};
+	private final int privateKey = 0xab;
 	private File file;
 	
 	public LicenseFileWriter() {
@@ -26,13 +25,13 @@ class LicenseFileWriter {
 	 */
 	public void writeAndClose(LicenseFile licenseFile) throws IOException{
 		FileOutputStream fos = new FileOutputStream(file);
-//		fos.write(privateKey);
 		
 		for(String line: licenseFile.getValues()) {
 			for (byte lb : line.getBytes()) {
-				fos.write(lb);
+				fos.write(lb^privateKey);
 			}
-			fos.write(newLine);
+			fos.write('\r'^privateKey);
+			fos.write('\n'^privateKey);
 		}
 		fos.close();
 	}

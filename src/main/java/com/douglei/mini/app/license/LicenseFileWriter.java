@@ -25,6 +25,7 @@ class LicenseFileWriter {
 	 */
 	public void writeAndClose(LicenseFile licenseFile) throws IOException{
 		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(privateKey);
 		
 		for(String line: licenseFile.getValues()) {
 			for (byte lb : line.getBytes()) {

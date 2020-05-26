@@ -11,7 +11,7 @@ import java.util.Base64;
  * 签名处理器
  * @author DougLei
  */
-class SignatureHandler {
+public class SignatureHandler {
 	private byte[] privateKey;
 	
 	public SignatureHandler(String privateKey) {

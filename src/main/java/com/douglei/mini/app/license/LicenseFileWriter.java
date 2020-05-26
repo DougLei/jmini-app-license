@@ -1,60 +1,47 @@
 package com.douglei.mini.app.license;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.douglei.tools.instances.file.writer.FileBufferedWriter;
+import com.douglei.mini.app.license.file.LicenseFile;
 
 /**
  * 授权文件编写器
  * @author DougLei
  */
 class LicenseFileWriter {
-	private File licenseFile;
-	private FileBufferedWriter licenseFileWriter;
-	private StringBuilder content;
+	private final int privateKey = 0x66;
+	private File file;
 	
 	public LicenseFileWriter() {
-		licenseFile = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "license.lf");
-		licenseFileWriter = new FileBufferedWriter(licenseFile);
-		content = new StringBuilder(100);
-	}
-
-	/**
-	 * 写入key和value
-	 * @param key
-	 * @param value
-	 * @throws IOException 
-	 */
-	public void write(String key, String value) throws IOException {
-		licenseFileWriter.write(key + '=' + value);
-		content.append(key).append('=').append(value);
+		file = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "license.lf");
 	}
 	
 	/**
-	 * 写入签名
-	 * @param key
-	 * @param signatureHandler 签名处理器
-	 * @throws IOException 
+	 * 将授权文件信息写入到文件中, 并关闭流
+	 * @param licenseFile
+	 * @throws IOException
 	 */
-	public void writeSign(String key, SignatureHandler signatureHandler) throws IOException {
-		licenseFileWriter.writeln(key + '=' + signatureHandler.sign(content.toString()));
-	}
-
-	/**
-	 * 关闭编写器
-	 */
-	public void close() {
-		// TODO Auto-generated method stub
+	public void writeAndClose(LicenseFile licenseFile) throws IOException{
+		FileOutputStream fos = new FileOutputStream(file);
+		byte[] newLine = {'\r', '\n'};
+		fos.write(privateKey);
 		
-		
+		for(String line: licenseFile.getValues()) {
+			for (byte lb : line.getBytes()) {
+				fos.write(lb^privateKey);
+			}
+			fos.write(newLine);
+		}
+		fos.close();
 	}
-
+	
 	/**
 	 * 获取授权文件实例
 	 * @return
 	 */
 	public File getLicenseFile() {
-		return licenseFile;
+		return file;
 	}
 }

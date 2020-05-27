@@ -13,7 +13,7 @@ public class LicenseFileFactory {
 	 */
 	public static LicenseFile build(String type) {
 		if("2".equals(type)) {
-			return new DevLicenseFile();
+			return new DEVLicenseFile();
 		}
 		if("3".equals(type)) {
 			return new PRDLicenseFile();

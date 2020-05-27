@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import com.douglei.mini.app.license.file.LicenseFile;
+import com.douglei.mini.license.client.LicenseConstants;
 
 /**
  * 授权文件编写器
@@ -16,7 +17,7 @@ class LicenseFileWriter {
 	private File file;
 	
 	public LicenseFileWriter() {
-		file = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "license");
+		file = new File(System.getProperty("user.home") + File.separatorChar + "license-app" + File.separatorChar + LicenseConstants.FILE_NAME);
 	}
 	
 	/**

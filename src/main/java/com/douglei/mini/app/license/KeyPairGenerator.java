@@ -25,13 +25,13 @@ class KeyPairGenerator {
 			keyPairGenerator.initialize(1024, secureRandom); // 初始化密码对生成器, 密钥大小的范围为:96~1024
 			KeyPair keyPair = keyPairGenerator.genKeyPair();
 			
-			File publicKeyFile = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "License-PUBLIC-KEY（公钥-公开）.txt");
+			File publicKeyFile = new File(System.getProperty("user.home") + File.separatorChar + "license-app" + File.separatorChar + "public.key（公钥-公开）.txt");
 			FileBufferedWriter publicKeyFileWriter = new FileBufferedWriter(publicKeyFile);
 			publicKeyFileWriter.write(Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded()));
 			publicKeyFileWriter.close();
 			
 			
-			File privateKeyFile = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "License-PRIVATE-KEY（私钥-绝对保密）.txt");
+			File privateKeyFile = new File(System.getProperty("user.home") + File.separatorChar + "license-app" + File.separatorChar + "private.key（私钥-绝对保密）.txt");
 			byte[] privateKey = keyPair.getPrivate().getEncoded();
 			FileBufferedWriter privateKeyFileWriter = new FileBufferedWriter(privateKeyFile);
 			privateKeyFileWriter.write(Base64.getEncoder().encodeToString(privateKey));

@@ -1,11 +1,12 @@
 package com.douglei.mini.app.license;
 
 import java.security.KeyFactory;
-import java.security.MessageDigest;
 import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
+
+import com.douglei.mini.license.client.Util;
 
 /**
  * 签名处理器
@@ -30,11 +31,7 @@ public class SignatureHandler {
 		try {
 			Signature signature = Signature.getInstance("SHA1WithRSA");
 			signature.initSign((RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(privateKey)));
-			
-			// 对内容的摘要进行签名
-			MessageDigest digest = MessageDigest.getInstance("SHA-1");
-			digest.update(content.getBytes());
-			signature.update(digest.digest());
+			signature.update(Util.getDigest(content));
 			
 			return Base64.getEncoder().encodeToString(signature.sign());
 		} catch (Exception e) {

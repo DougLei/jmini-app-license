@@ -15,7 +15,7 @@ import com.douglei.mini.license.client.LicenseConstants;
  * @author DougLei
  */
 public abstract class LicenseFile {
-	private StringBuilder content = new StringBuilder(300); // 记录授权文件中的内容, 签名用
+	private StringBuilder content = new StringBuilder(500); // 记录授权文件中的内容, 签名用
 	private List<String> values = new ArrayList<String>(); // 记录授权文件中, 每行数据的内容集合
 	
 	/**

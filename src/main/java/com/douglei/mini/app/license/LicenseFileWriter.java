@@ -16,7 +16,7 @@ class LicenseFileWriter {
 	private File file;
 	
 	public LicenseFileWriter() {
-		file = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "license.lf");
+		file = new File(System.getProperty("user.home") + File.separatorChar + "License" + File.separatorChar + "license");
 	}
 	
 	/**

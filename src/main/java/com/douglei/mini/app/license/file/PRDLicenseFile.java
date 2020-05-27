@@ -12,7 +12,7 @@ import com.douglei.mini.license.client.LicenseKeyConstants;
 public class PRDLicenseFile extends LicenseFile {
 
 	public PRDLicenseFile() {
-		add(LicenseKeyConstants.KEY_TYPE, "prd");
+		add(LicenseKeyConstants.TYPE, "prd");
 	}
 
 	@Override
@@ -24,16 +24,16 @@ public class PRDLicenseFile extends LicenseFile {
 		String expired = scanner.next();
 		if("skip".equalsIgnoreCase(expired))
 			expired = getDefaultExpiredDate(Calendar.YEAR, 1);
-		add(LicenseKeyConstants.KEY_EXPIRED, expired);
+		add(LicenseKeyConstants.EXPIRED, expired);
 		
 		System.out.println("请输入服务器ip地址（多个用英文模式的逗号分隔开）：");
 		String ip = scanner.next();
 		if(!"skip".equalsIgnoreCase(ip)) 
-			add(LicenseKeyConstants.KEY_IP, ip);
+			add(LicenseKeyConstants.IP, ip);
 		
 		System.out.println("请输入服务器mac地址：");
 		String mac = scanner.next();
 		if(!"skip".equalsIgnoreCase(mac)) 
-			add(LicenseKeyConstants.KEY_MAC, mac);
+			add(LicenseKeyConstants.MAC, mac);
 	}
 }

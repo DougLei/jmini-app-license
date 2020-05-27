@@ -12,6 +12,7 @@ import com.douglei.mini.app.license.file.LicenseFile;
  */
 class LicenseFileWriter {
 	private final int privateKey = 0xAB;
+	private final int separator = '\n'^privateKey;
 	private File file;
 	
 	public LicenseFileWriter() {
@@ -28,10 +29,10 @@ class LicenseFileWriter {
 		fos.write(privateKey);
 		
 		for(String line: licenseFile.getValues()) {
-			for (byte lb : line.getBytes()) {
-				fos.write(lb^privateKey);
+			for (byte b : line.getBytes()) {
+				fos.write(b^privateKey);
 			}
-			fos.write('\t'^privateKey);
+			fos.write(separator);
 		}
 		fos.close();
 	}

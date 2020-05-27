@@ -15,15 +15,14 @@ import com.douglei.mini.license.client.LicenseKeyConstants;
  * @author DougLei
  */
 public abstract class LicenseFile {
-	private StringBuilder content = new StringBuilder(160); // 记录授权文件中的内容, 签名用
+	private StringBuilder content = new StringBuilder(200); // 记录授权文件中的内容, 签名用
 	private List<String> values = new ArrayList<String>(); // 记录授权文件中, 每行数据的内容集合
 	
 	/**
 	 * 设置签名信息
 	 */
 	public void setSign(SignatureHandler signatureHandler) {
-		System.out.println(signatureHandler.sign(content.toString()));
-		add(LicenseKeyConstants.KEY_SIGNATURE, signatureHandler.sign(content.toString()));
+		add(LicenseKeyConstants.SIGNATURE, signatureHandler.sign(content.toString()));
 	}
 	
 	/**

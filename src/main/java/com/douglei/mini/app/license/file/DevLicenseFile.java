@@ -12,11 +12,11 @@ import com.douglei.mini.license.client.LicenseKeyConstants;
 public class DevLicenseFile extends LicenseFile {
 	
 	public DevLicenseFile() {
-		add(LicenseKeyConstants.KEY_TYPE, "dev");
+		add(LicenseKeyConstants.TYPE, "dev");
 	}
 
 	@Override
 	public void setOtherLimitInfo(Scanner scanner) {
-		add(LicenseKeyConstants.KEY_EXPIRED, getDefaultExpiredDate(Calendar.MONTH, 3));
+		add(LicenseKeyConstants.EXPIRED, getDefaultExpiredDate(Calendar.MONTH, 3));
 	}
 }

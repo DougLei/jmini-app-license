@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.douglei.mini.app.license.SignatureHandler;
-import com.douglei.mini.license.client.LicenseConstants;
+import com.douglei.mini.license.client.LicenseFileProperty;
 
 /**
  * 
@@ -22,7 +22,7 @@ public abstract class LicenseFile {
 	 * 设置签名信息
 	 */
 	public void setSign(SignatureHandler signatureHandler) {
-		add(LicenseConstants.KEY_SIGNATURE, signatureHandler.sign(content.toString()));
+		add(LicenseFileProperty.SIGNATURE, signatureHandler.sign(content.toString()));
 	}
 	
 	/**
@@ -36,8 +36,8 @@ public abstract class LicenseFile {
 	 * @param key
 	 * @param value
 	 */
-	protected void add(String key, String value) {
-		values.add(key + '=' + value);
+	protected void add(LicenseFileProperty key, String value) {
+		values.add(key.name().toLowerCase() + '=' + value);
 		content.append(values.get(values.size()-1));
 	}
 	

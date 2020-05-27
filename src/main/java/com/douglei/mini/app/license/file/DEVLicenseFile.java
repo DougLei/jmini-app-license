@@ -3,7 +3,7 @@ package com.douglei.mini.app.license.file;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import com.douglei.mini.license.client.LicenseConstants;
+import com.douglei.mini.license.client.LicenseFileProperty;
 
 /**
  * 开发环境授权文件
@@ -12,11 +12,11 @@ import com.douglei.mini.license.client.LicenseConstants;
 public class DEVLicenseFile extends LicenseFile {
 	
 	public DEVLicenseFile() {
-		add(LicenseConstants.KEY_TYPE, "dev");
+		add(LicenseFileProperty.TYPE, "dev");
 	}
 
 	@Override
 	public void setOtherLimitInfo(Scanner scanner) {
-		add(LicenseConstants.KEY_EXPIRED, getDefaultExpiredDate(Calendar.MONTH, 3));
+		add(LicenseFileProperty.EXPIRED, getDefaultExpiredDate(Calendar.MONTH, 3));
 	}
 }

@@ -3,7 +3,7 @@ package com.douglei.mini.app.license.file;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import com.douglei.mini.license.client.LicenseConstants;
+import com.douglei.mini.license.client.LicenseFileProperty;
 
 /**
  * 生产环境授权文件
@@ -12,7 +12,7 @@ import com.douglei.mini.license.client.LicenseConstants;
 public class PRDLicenseFile extends LicenseFile {
 
 	public PRDLicenseFile() {
-		add(LicenseConstants.KEY_TYPE, "prd");
+		add(LicenseFileProperty.TYPE, "prd");
 	}
 
 	@Override
@@ -24,16 +24,16 @@ public class PRDLicenseFile extends LicenseFile {
 		String expired = scanner.next();
 		if("skip".equalsIgnoreCase(expired))
 			expired = getDefaultExpiredDate(Calendar.YEAR, 1);
-		add(LicenseConstants.KEY_EXPIRED, expired);
+		add(LicenseFileProperty.EXPIRED, expired);
 		
 		System.out.println("请输入服务器ip地址（多个用英文模式的逗号分隔开）：");
 		String ip = scanner.next();
 		if(!"skip".equalsIgnoreCase(ip)) 
-			add(LicenseConstants.KEY_IP, ip);
+			add(LicenseFileProperty.IP, ip);
 		
 		System.out.println("请输入服务器mac地址：");
 		String mac = scanner.next();
 		if(!"skip".equalsIgnoreCase(mac)) 
-			add(LicenseConstants.KEY_MAC, mac);
+			add(LicenseFileProperty.MAC, mac);
 	}
 }

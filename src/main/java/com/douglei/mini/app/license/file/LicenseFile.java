@@ -63,6 +63,6 @@ public abstract class LicenseFile extends com.douglei.mini.license.client.Licens
 	 * @return
 	 */
 	public String getFileName() {
-		return type.getValue() + '-' + expired.getValue() + ".license";
+		return type.getValue() + '.' + expired.getValue() + ".license";
 	}
 }

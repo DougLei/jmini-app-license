@@ -37,6 +37,6 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		System.out.println("请输入服务器mac地址（多个用英文模式的逗号分隔开）：");
 		String mac_ = scanner.next();
 		if(!"skip".equalsIgnoreCase(mac_)) 
-			mac = new MacProperty(mac_);
+			mac = new MacProperty(mac_.toUpperCase());
 	}
 }

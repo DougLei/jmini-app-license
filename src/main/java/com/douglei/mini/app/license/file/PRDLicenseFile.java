@@ -6,7 +6,6 @@ import java.util.Scanner;
 import com.douglei.mini.license.client.property.ExpiredProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
-import com.douglei.mini.license.client.property.TypeProperty;
 
 /**
  * 生产环境授权文件
@@ -14,10 +13,11 @@ import com.douglei.mini.license.client.property.TypeProperty;
  */
 public class PRDLicenseFile extends AbstractLicenseFile {
 
-	public PRDLicenseFile() {
-		type = new TypeProperty("prd");
+	@Override
+	protected String getType() {
+		return "prd";
 	}
-
+	
 	@Override
 	public void setOtherLimitInfo(Scanner scanner) {
 		System.out.println("\n下面开始录入授权文件中的其他信息，如果想跳过某个配置项，请输入skip（不区分大小写）并回车确认");
@@ -34,7 +34,7 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		if(!"skip".equalsIgnoreCase(ip_)) 
 			ip = new IpProperty(ip_);
 		
-		System.out.println("请输入服务器mac地址：");
+		System.out.println("请输入服务器mac地址（多个用英文模式的逗号分隔开）：");
 		String mac_ = scanner.next();
 		if(!"skip".equalsIgnoreCase(mac_)) 
 			mac = new MacProperty(mac_);

@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 import com.douglei.mini.license.client.property.ExpiredProperty;
-import com.douglei.mini.license.client.property.TypeProperty;
 
 /**
  * 开发环境授权文件
@@ -12,10 +11,11 @@ import com.douglei.mini.license.client.property.TypeProperty;
  */
 public class DEVLicenseFile extends AbstractLicenseFile {
 	
-	public DEVLicenseFile() {
-		type = new TypeProperty("dev");
+	@Override
+	protected String getType() {
+		return "dev";
 	}
-
+	
 	@Override
 	public void setOtherLimitInfo(Scanner scanner) {
 		expired = new ExpiredProperty(getDefaultExpiredDate(Calendar.MONTH, 3));

@@ -18,6 +18,12 @@ import com.douglei.mini.license.client.property.SignatureProperty;
 public abstract class AbstractLicenseFile extends LicenseFile{
 	
 	/**
+	 * 获取授权文件类型
+	 * @return
+	 */
+	protected abstract String getType();
+	
+	/**
 	 * 获取授权文件默认的截止日期, 格式为yyyy-MM-dd, 不包括时分秒
 	 * @param field
 	 * @param amount
@@ -49,7 +55,6 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	 */
 	public List<String> getContents(){
 		List<String> contents = new ArrayList<String>();
-		contents.add(type.getContent());
 		contents.add(expired.getContent());
 		if(ip != null)
 			contents.add(ip.getContent());
@@ -64,6 +69,6 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	 * @return
 	 */
 	public String getFileName() {
-		return type.getValue() + '.' + expired.getValue() + ".license";
+		return getType() + '.' + expired.getValue() + ".license";
 	}
 }

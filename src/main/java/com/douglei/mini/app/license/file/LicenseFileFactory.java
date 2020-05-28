@@ -11,7 +11,7 @@ public class LicenseFileFactory {
 	 * @param type
 	 * @return
 	 */
-	public static LicenseFile build(String type) {
+	public static AbstractLicenseFile build(String type) {
 		if("2".equals(type)) {
 			return new DEVLicenseFile();
 		}

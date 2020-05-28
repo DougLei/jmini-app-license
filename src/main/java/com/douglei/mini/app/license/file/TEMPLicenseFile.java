@@ -10,7 +10,7 @@ import com.douglei.mini.license.client.property.TypeProperty;
  * 临时授权文件
  * @author DougLei
  */
-public class TEMPLicenseFile extends LicenseFile {
+public class TEMPLicenseFile extends AbstractLicenseFile {
 	
 	public TEMPLicenseFile() {
 		type = new TypeProperty("temp");

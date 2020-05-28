@@ -3,7 +3,7 @@ package com.douglei.mini.app.license;
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.douglei.mini.app.license.file.LicenseFile;
+import com.douglei.mini.app.license.file.AbstractLicenseFile;
 import com.douglei.mini.app.license.file.LicenseFileFactory;
 
 /**
@@ -42,7 +42,7 @@ public class LicenseApp {
 		System.out.println("2. 开发环境的授权文件，有效期固定三个月，没有其他限制");
 		System.out.println("3. 生产环境的授权文件，有效期默认一年（可调整），同时可以追加其他限制");
 		System.out.println("---------------------------------");
-		LicenseFile licenseFile = LicenseFileFactory.build(scanner.next());
+		AbstractLicenseFile licenseFile = LicenseFileFactory.build(scanner.next());
 		licenseFile.setOtherLimitInfo(scanner);
 		licenseFile.setSign(signatureHandler);
 		

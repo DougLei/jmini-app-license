@@ -12,7 +12,7 @@ import com.douglei.mini.license.client.property.TypeProperty;
  * 生产环境授权文件
  * @author DougLei
  */
-public class PRDLicenseFile extends LicenseFile {
+public class PRDLicenseFile extends AbstractLicenseFile {
 
 	public PRDLicenseFile() {
 		type = new TypeProperty("prd");

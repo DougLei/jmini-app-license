@@ -10,7 +10,7 @@ import com.douglei.mini.license.client.property.TypeProperty;
  * 开发环境授权文件
  * @author DougLei
  */
-public class DEVLicenseFile extends LicenseFile {
+public class DEVLicenseFile extends AbstractLicenseFile {
 	
 	public DEVLicenseFile() {
 		type = new TypeProperty("dev");

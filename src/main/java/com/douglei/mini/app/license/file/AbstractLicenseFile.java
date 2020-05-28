@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.douglei.mini.app.license.SignatureHandler;
+import com.douglei.mini.license.client.LicenseFile;
 import com.douglei.mini.license.client.property.SignatureProperty;
 
 /**
  * 
  * @author DougLei
  */
-public abstract class LicenseFile extends com.douglei.mini.license.client.LicenseFile{
+public abstract class AbstractLicenseFile extends LicenseFile{
 	
 	/**
 	 * 获取授权文件默认的截止日期, 格式为yyyy-MM-dd, 不包括时分秒

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.douglei.mini.app.license.file.LicenseFile;
+import com.douglei.mini.app.license.file.AbstractLicenseFile;
 
 /**
  * 授权文件编写器
@@ -20,7 +20,7 @@ class LicenseFileWriter {
 	 * @param licenseFile
 	 * @throws IOException
 	 */
-	public void writeAndClose(LicenseFile licenseFile) throws IOException{
+	public void writeAndClose(AbstractLicenseFile licenseFile) throws IOException{
 		file = new File(System.getProperty("user.home") + File.separatorChar + "license-app" + File.separatorChar + licenseFile.getFileName());
 		
 		FileOutputStream fos = new FileOutputStream(file);

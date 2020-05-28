@@ -3,7 +3,10 @@ package com.douglei.mini.app.license.file;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import com.douglei.mini.license.client.LicenseConstants;
+import com.douglei.mini.license.client.property.ExpiredProperty;
+import com.douglei.mini.license.client.property.IpProperty;
+import com.douglei.mini.license.client.property.MacProperty;
+import com.douglei.mini.license.client.property.TypeProperty;
 
 /**
  * 生产环境授权文件
@@ -12,7 +15,7 @@ import com.douglei.mini.license.client.LicenseConstants;
 public class PRDLicenseFile extends LicenseFile {
 
 	public PRDLicenseFile() {
-		add(LicenseConstants.KEY_TYPE, "prd");
+		type = new TypeProperty("prd");
 	}
 
 	@Override
@@ -21,19 +24,19 @@ public class PRDLicenseFile extends LicenseFile {
 		System.out.println("---------------------------------");
 		
 		System.out.println("请输入授权文件的有效日期（yyyy-MM-dd）：");
-		String expired = scanner.next();
-		if("skip".equalsIgnoreCase(expired))
-			expired = getDefaultExpiredDate(Calendar.YEAR, 1);
-		add(LicenseConstants.KEY_EXPIRED, expired);
+		String expired_ = scanner.next();
+		if("skip".equalsIgnoreCase(expired_))
+			expired_ = getDefaultExpiredDate(Calendar.YEAR, 1);
+		expired = new ExpiredProperty(expired_);
 		
 		System.out.println("请输入服务器ip地址（多个用英文模式的逗号分隔开）：");
-		String ip = scanner.next();
-		if(!"skip".equalsIgnoreCase(ip)) 
-			add(LicenseConstants.KEY_IP, ip);
+		String ip_ = scanner.next();
+		if(!"skip".equalsIgnoreCase(ip_)) 
+			ip = new IpProperty(ip_);
 		
 		System.out.println("请输入服务器mac地址：");
-		String mac = scanner.next();
-		if(!"skip".equalsIgnoreCase(mac)) 
-			add(LicenseConstants.KEY_MAC, mac);
+		String mac_ = scanner.next();
+		if(!"skip".equalsIgnoreCase(mac_)) 
+			mac = new MacProperty(mac_);
 	}
 }

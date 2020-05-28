@@ -8,38 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.douglei.mini.app.license.SignatureHandler;
-import com.douglei.mini.license.client.LicenseConstants;
+import com.douglei.mini.license.client.property.SignatureProperty;
 
 /**
  * 
  * @author DougLei
  */
-public abstract class LicenseFile {
-	private StringBuilder content = new StringBuilder(500); // 记录授权文件中的内容, 签名用
-	private List<String> values = new ArrayList<String>(); // 记录授权文件中, 每行数据的内容集合
-	
-	/**
-	 * 设置签名信息
-	 */
-	public void setSign(SignatureHandler signatureHandler) {
-		add(LicenseConstants.KEY_SIGNATURE, signatureHandler.sign(content.toString()));
-	}
-	
-	/**
-	 * 记录其他限制信息
-	 * @param scanner
-	 */
-	public abstract void setOtherLimitInfo(Scanner scanner);
-	
-	/**
-	 * 添加授权文件中的信息键值对
-	 * @param key
-	 * @param value
-	 */
-	protected void add(String key, String value) {
-		values.add(key + '=' + value);
-		content.append(values.get(values.size()-1));
-	}
+public abstract class LicenseFile extends com.douglei.mini.license.client.LicenseFile{
 	
 	/**
 	 * 获取授权文件默认的截止日期, 格式为yyyy-MM-dd, 不包括时分秒
@@ -53,12 +28,42 @@ public abstract class LicenseFile {
 		c.add(field, amount);
 		return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
 	}
-
+	
 	/**
-	 * 
+	 * 记录其他限制信息
+	 * @param scanner
+	 */
+	public abstract void setOtherLimitInfo(Scanner scanner);
+	
+	/**
+	 * 设置签名信息
+	 */
+	public void setSign(SignatureHandler signatureHandler) {
+		signature = new SignatureProperty(signatureHandler.sign(getContentDigest()));
+	}
+	
+	/**
+	 * 获取授权文件的内容集合
 	 * @return
 	 */
-	public List<String> getValues() {
-		return values;
+	public List<String> getContents(){
+		List<String> contents = new ArrayList<String>();
+		if(type != null)
+			contents.add(type.getContent());
+		if(expired != null)
+			contents.add(expired.getContent());
+		if(ip != null)
+			contents.add(ip.getContent());
+		if(mac != null)
+			contents.add(mac.getContent());
+		return contents;
+	}
+	
+	/**
+	 * 获取授权文件名
+	 * @return
+	 */
+	public String getFileName() {
+		return type.getValue() + '-' + expired.getValue() + ".license";
 	}
 }

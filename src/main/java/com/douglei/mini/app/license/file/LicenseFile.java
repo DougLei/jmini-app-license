@@ -48,14 +48,13 @@ public abstract class LicenseFile extends com.douglei.mini.license.client.Licens
 	 */
 	public List<String> getContents(){
 		List<String> contents = new ArrayList<String>();
-		if(type != null)
-			contents.add(type.getContent());
-		if(expired != null)
-			contents.add(expired.getContent());
+		contents.add(type.getContent());
+		contents.add(expired.getContent());
 		if(ip != null)
 			contents.add(ip.getContent());
 		if(mac != null)
 			contents.add(mac.getContent());
+		contents.add(signature.getContent());
 		return contents;
 	}
 	

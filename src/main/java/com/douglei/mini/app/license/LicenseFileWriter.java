@@ -21,7 +21,7 @@ class LicenseFileWriter {
 	 * @throws IOException
 	 */
 	public void writeAndClose(AbstractLicenseFile licenseFile) throws IOException{
-		file = new File(System.getProperty("user.home") + File.separatorChar + "license-app" + File.separatorChar + licenseFile.getFileName());
+		file = new File(System.getProperty("user.home") + File.separatorChar + ".license-app" + File.separatorChar + licenseFile.getFileName());
 		
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(privateKey);

@@ -1,5 +1,6 @@
 package com.douglei.mini.app.license.file;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,6 +22,6 @@ public class TEMPLicenseFile extends AbstractLicenseFile {
 	public void setOtherLimitInfo(Scanner scanner) {
 		Date current = new Date();
 		start = new StartProperty(getStartDate(current));
-		expired = new ExpiredProperty(getDefaultExpiredDate(current, 29));
+		expired = new ExpiredProperty(getDefaultExpiredDate(current, Calendar.DAY_OF_YEAR, 30));
 	}
 }

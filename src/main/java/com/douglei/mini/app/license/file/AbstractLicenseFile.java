@@ -36,13 +36,14 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	/**
 	 * 获取授权文件默认的截止日期, 格式为yyyy-MM-dd, 不包括时分秒
 	 * @param current
+	 * @param field
 	 * @param amount
 	 * @return
 	 */
-	protected String getDefaultExpiredDate(Date current, int amount) {
+	protected String getDefaultExpiredDate(Date current, int field, int amount) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(current);
-		c.add(Calendar.DAY_OF_YEAR, amount);
+		c.add(field, amount);
 		return sdf.format(c.getTime());
 	}
 	

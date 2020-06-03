@@ -16,6 +16,7 @@ import com.douglei.mini.license.client.property.SignatureProperty;
  * @author DougLei
  */
 public abstract class AbstractLicenseFile extends LicenseFile{
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	/**
 	 * 获取授权文件类型
@@ -24,16 +25,26 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	protected abstract String getType();
 	
 	/**
+	 * 获取授权文件默认的起始日期, 格式为yyyy-MM-dd, 不包括时分秒
+	 * @param field
+	 * @param amount
+	 * @return
+	 */
+	protected String getStartDate(Date current) {
+		return sdf.format(current);
+	}
+	
+	/**
 	 * 获取授权文件默认的截止日期, 格式为yyyy-MM-dd, 不包括时分秒
 	 * @param field
 	 * @param amount
 	 * @return
 	 */
-	protected String getDefaultExpiredDate(int field, int amount) {
+	protected String getDefaultExpiredDate(Date current, int field, int amount) {
 		Calendar c = Calendar.getInstance();
-		c.setTime(new Date());
+		c.setTime(current);
 		c.add(field, amount);
-		return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+		return sdf.format(c.getTime());
 	}
 	
 	/**
@@ -50,11 +61,12 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	}
 	
 	/**
-	 * 获取授权文件的内容集合
+	 * 获取授权文件的内容集合, 用于写入到授权文件中
 	 * @return
 	 */
 	public List<String> getContents(){
 		List<String> contents = new ArrayList<String>();
+		contents.add(start.getContent());
 		contents.add(expired.getContent());
 		if(ip != null)
 			contents.add(ip.getContent());

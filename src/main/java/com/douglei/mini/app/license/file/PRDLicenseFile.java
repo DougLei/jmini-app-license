@@ -44,5 +44,27 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		String mac_ = scanner.next();
 		if(!"skip".equalsIgnoreCase(mac_)) 
 			mac = new MacProperty(mac_.toUpperCase());
+		
+		setExtLimitInfo(scanner);
+	}
+	
+	/**
+	 * 记录其他扩展信息
+	 * @param scanner
+	 */
+	private void setExtLimitInfo(Scanner scanner) {
+		System.out.println("\n下面开始录入扩展信息");
+		System.out.println("---------------------------------");
+		
+		byte index = 1;
+		String key;
+		do {
+			System.out.println("请输入第"+index+"个扩展信息的key值（输入skip（不区分大小写）并回车，可结束扩展信息的录入）: ");
+			if("skip".equalsIgnoreCase(key = scanner.next())) 
+				break;
+			System.out.println("请输入第"+index+"个扩展信息的value值: ");
+			addExts(key, scanner.next());
+			index++;
+		}while(true);
 	}
 }

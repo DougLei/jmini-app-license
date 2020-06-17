@@ -68,33 +68,33 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 			System.out.println("请输入第"+index+"个扩展信息的value值: ");
 			value = scanner.next();
 			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.系统启动时验证，2.系统运行时验证，3.始终验证");
-			addExts(key, value, toEVM(scanner.nextByte()));
+			addExts(key, value, toVMName(scanner.nextByte()));
 			index++;
 		}while(true);
 	}
 	
 	/**
-	 * 获取验证模式
+	 * 获取验证模式名
 	 * @param evmNum
 	 * @return
 	 */
-	private ExtValidateMode toEVM(byte evmNum) {
+	private String toVMName(byte evmNum) {
 		if(evmNum == 1)
-			return ExtValidateMode.START;
+			return ExtValidateMode.START.name();
 		if(evmNum == 2)
-			return ExtValidateMode.RUN;
-		return ExtValidateMode.ALL;
+			return ExtValidateMode.RUN.name();
+		return ExtValidateMode.ALL.name();
 	}
 	
 	/**
 	 * 添加扩展信息
 	 * @param key
 	 * @param value
-	 * @param evm
+	 * @param vmName
 	 */
-	private void addExts(String key, String value, ExtValidateMode evm) {
+	private void addExts(String key, String value, String vmName) {
 		if(exts == null)
 			exts = new ArrayList<ExtProperty>();
-		exts.add(new ExtProperty(key+"."+evm.name(), value));
+		exts.add(new ExtProperty(key+"."+vmName, value, false));
 	}
 }

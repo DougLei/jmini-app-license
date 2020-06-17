@@ -67,8 +67,8 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 				break;
 			System.out.println("请输入第"+index+"个扩展信息的value值: ");
 			value = scanner.next();
-			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.启动验证，2.定时验证，3.均需验证");
-			addExts(key, value, toEVM(scanner.nextInt()));
+			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.启动验证，2.定时验证，3.始终验证");
+			addExts(key, value, toEVM(scanner.nextByte()));
 			index++;
 		}while(true);
 	}
@@ -78,7 +78,7 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 	 * @param evmNum
 	 * @return
 	 */
-	private ExtValidateMode toEVM(int evmNum) {
+	private ExtValidateMode toEVM(byte evmNum) {
 		if(evmNum == 1)
 			return ExtValidateMode.START;
 		if(evmNum == 2)

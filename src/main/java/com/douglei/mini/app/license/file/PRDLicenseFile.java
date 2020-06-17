@@ -59,15 +59,15 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		System.out.println("---------------------------------");
 		
 		byte index = 1;
-		String key;
+		String name;
 		do {
-			System.out.println("请输入第"+index+"个授权信息的key值（输入skip（不区分大小写）并回车，可结束自定义授权信息的录入）: ");
-			if("skip".equalsIgnoreCase(key = scanner.next())) 
+			System.out.println("请输入第"+index+"个授权信息的name值（输入skip（不区分大小写）并回车，可结束自定义授权信息的录入）: ");
+			if("skip".equalsIgnoreCase(name = scanner.next())) 
 				break;
 			System.out.println("请输入第"+index+"个授权信息的value值: ");
 			if(customs == null)
 				customs = new ArrayList<CustomProperty>();
-			customs.add(new CustomProperty(key, scanner.next()));
+			customs.add(new CustomProperty(name, scanner.next()));
 			
 			index++;
 		}while(true);

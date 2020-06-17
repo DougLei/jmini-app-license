@@ -8,6 +8,7 @@ import com.douglei.mini.license.client.property.ExpiredProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
 import com.douglei.mini.license.client.property.StartProperty;
+import com.douglei.mini.license.client.property.ValidateMode;
 
 /**
  * 生产环境授权文件
@@ -57,14 +58,24 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		System.out.println("---------------------------------");
 		
 		byte index = 1;
-		String key;
+		String key, value;
 		do {
 			System.out.println("请输入第"+index+"个扩展信息的key值（输入skip（不区分大小写）并回车，可结束扩展信息的录入）: ");
 			if("skip".equalsIgnoreCase(key = scanner.next())) 
 				break;
 			System.out.println("请输入第"+index+"个扩展信息的value值: ");
-			addExts(key, scanner.next());
+			value = scanner.next();
+			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.启动验证，2.定时验证，3.均需验证");
+			addExts(key, value, toVM(scanner.nextInt()));
 			index++;
 		}while(true);
+	}
+	
+	private ValidateMode toVM(int vm) {
+		if(vm == 1)
+			return ValidateMode.START;
+		if(vm == 2)
+			return ValidateMode.TIMER;
+		return ValidateMode.ALL;
 	}
 }

@@ -5,9 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.douglei.mini.license.client.ExtValidateMode;
 import com.douglei.mini.license.client.property.ExpiredProperty;
-import com.douglei.mini.license.client.property.ExtProperty;
+import com.douglei.mini.license.client.property.CustomProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
 import com.douglei.mini.license.client.property.StartProperty;
@@ -48,53 +47,29 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		if(!"skip".equalsIgnoreCase(mac_)) 
 			mac = new MacProperty(mac_.toUpperCase());
 		
-		setExtLimitInfo(scanner);
+		setCustomInfo(scanner);
 	}
 	
 	/**
-	 * 记录其他扩展信息
+	 * 记录自定义授权信息
 	 * @param scanner
 	 */
-	private void setExtLimitInfo(Scanner scanner) {
-		System.out.println("\n下面开始录入扩展信息");
+	private void setCustomInfo(Scanner scanner) {
+		System.out.println("\n下面开始录入自定义授权信息");
 		System.out.println("---------------------------------");
 		
 		byte index = 1;
-		String key, value;
+		String key;
 		do {
-			System.out.println("请输入第"+index+"个扩展信息的key值（输入skip（不区分大小写）并回车，可结束扩展信息的录入）: ");
+			System.out.println("请输入第"+index+"个授权信息的key值（输入skip（不区分大小写）并回车，可结束自定义授权信息的录入）: ");
 			if("skip".equalsIgnoreCase(key = scanner.next())) 
 				break;
-			System.out.println("请输入第"+index+"个扩展信息的value值: ");
-			value = scanner.next();
-			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.系统启动时验证，2.系统运行时验证，3.始终验证");
-			addExts(key, value, toVMName(scanner.nextByte()));
+			System.out.println("请输入第"+index+"个授权信息的value值: ");
+			if(customs == null)
+				customs = new ArrayList<CustomProperty>();
+			customs.add(new CustomProperty(key, scanner.next()));
+			
 			index++;
 		}while(true);
-	}
-	
-	/**
-	 * 获取验证模式名
-	 * @param evmNum
-	 * @return
-	 */
-	private String toVMName(byte evmNum) {
-		if(evmNum == 1)
-			return ExtValidateMode.START.name();
-		if(evmNum == 2)
-			return ExtValidateMode.RUN.name();
-		return ExtValidateMode.ALL.name();
-	}
-	
-	/**
-	 * 添加扩展信息
-	 * @param key
-	 * @param value
-	 * @param vmName
-	 */
-	private void addExts(String key, String value, String vmName) {
-		if(exts == null)
-			exts = new ArrayList<ExtProperty>();
-		exts.add(new ExtProperty(key+"."+vmName, value, false));
 	}
 }

@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.douglei.mini.license.client.ExtValidateMode;
 import com.douglei.mini.license.client.property.ExpiredProperty;
 import com.douglei.mini.license.client.property.ExtProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
 import com.douglei.mini.license.client.property.StartProperty;
-import com.douglei.mini.license.client.property.ValidateMode;
 
 /**
  * 生产环境授权文件
@@ -68,34 +68,34 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 			System.out.println("请输入第"+index+"个扩展信息的value值: ");
 			value = scanner.next();
 			System.out.println("请输入第"+index+"个扩展信息的验证模式: 1.启动验证，2.定时验证，3.均需验证");
-			addExts(key, value, toVM(scanner.nextInt()));
+			addExts(key, value, toEVM(scanner.nextInt()));
 			index++;
 		}while(true);
 	}
 	
 	/**
 	 * 获取验证模式
-	 * @param vmNum
+	 * @param evmNum
 	 * @return
 	 */
-	private ValidateMode toVM(int vmNum) {
-		if(vmNum == 1)
-			return ValidateMode.START;
-		if(vmNum == 2)
-			return ValidateMode.TIMER;
-		return ValidateMode.ALL;
+	private ExtValidateMode toEVM(int evmNum) {
+		if(evmNum == 1)
+			return ExtValidateMode.START;
+		if(evmNum == 2)
+			return ExtValidateMode.TIMER;
+		return ExtValidateMode.ALL;
 	}
 	
 	/**
 	 * 添加扩展信息
 	 * @param key
 	 * @param value
-	 * @param vm
+	 * @param evm
 	 */
-	private void addExts(String key, String value, ValidateMode vm) {
+	private void addExts(String key, String value, ExtValidateMode evm) {
 		if(exts == null)
 			exts = new ArrayList<ExtProperty>();
 		exts.add(new ExtProperty(key, value));
-		exts.add(new ExtProperty(key+'.'+ValidateMode.KEY_SUFFIX, vm.name()));
+		exts.add(new ExtProperty(key+".vm", evm.name()));
 	}
 }

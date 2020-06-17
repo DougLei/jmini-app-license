@@ -73,7 +73,7 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 		if(mac != null)
 			contents.add(mac.getContent());
 		if(exts != null)
-			exts.forEach(ext -> contents.add(ext));
+			exts.forEach(ext -> contents.add(ext.getContent()));
 		contents.add(signature.getContent());
 		return contents;
 	}

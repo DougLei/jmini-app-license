@@ -1,10 +1,12 @@
 package com.douglei.mini.app.license.file;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
 import com.douglei.mini.license.client.property.ExpiredProperty;
+import com.douglei.mini.license.client.property.ExtProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
 import com.douglei.mini.license.client.property.StartProperty;
@@ -71,11 +73,29 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		}while(true);
 	}
 	
-	private ValidateMode toVM(int vm) {
-		if(vm == 1)
+	/**
+	 * 获取验证模式
+	 * @param vmNum
+	 * @return
+	 */
+	private ValidateMode toVM(int vmNum) {
+		if(vmNum == 1)
 			return ValidateMode.START;
-		if(vm == 2)
+		if(vmNum == 2)
 			return ValidateMode.TIMER;
 		return ValidateMode.ALL;
+	}
+	
+	/**
+	 * 添加扩展信息
+	 * @param key
+	 * @param value
+	 * @param vm
+	 */
+	private void addExts(String key, String value, ValidateMode vm) {
+		if(exts == null)
+			exts = new ArrayList<ExtProperty>();
+		exts.add(new ExtProperty(key, value));
+		exts.add(new ExtProperty(key+'.'+ValidateMode.KEY_SUFFIX, vm.name()));
 	}
 }

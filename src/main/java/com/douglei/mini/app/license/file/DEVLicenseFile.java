@@ -22,6 +22,6 @@ public class DEVLicenseFile extends AbstractLicenseFile {
 	public void setOtherLimitInfo(Scanner scanner) {
 		Date current = new Date();
 		start = new StartProperty(getStartDate(current));
-		expired = new ExpiredProperty(getDefaultExpiredDate(current, Calendar.MONTH, 3));
+		expired = new ExpiredProperty(getDefaultExpiredDate(current, Calendar.DAY_OF_YEAR, 89));
 	}
 }

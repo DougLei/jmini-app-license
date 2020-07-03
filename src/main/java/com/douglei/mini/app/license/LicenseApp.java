@@ -38,8 +38,8 @@ public class LicenseApp {
 		
 		System.out.println("\n---------------------------------");
 		System.out.println("请选择授权文件的类型（默认值为1）：");
-		System.out.println("1. 临时授权文件，有效期固定一个月，没有其他限制");
-		System.out.println("2. 开发环境的授权文件，有效期固定三个月，没有其他限制");
+		System.out.println("1. 临时授权文件，有效期固定30天，没有其他限制");
+		System.out.println("2. 开发环境的授权文件，有效期固定90天，没有其他限制");
 		System.out.println("3. 生产环境的授权文件，有效期默认一年（可调整），同时可以追加其他限制");
 		System.out.println("---------------------------------");
 		AbstractLicenseFile licenseFile = LicenseFileFactory.build(scanner.next());

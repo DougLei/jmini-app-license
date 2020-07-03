@@ -1,6 +1,5 @@
 package com.douglei.mini.app.license.file;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -32,7 +31,7 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		System.out.println("请输入授权文件的有效日期（yyyy-MM-dd）：");
 		String expired_ = scanner.next();
 		if("skip".equalsIgnoreCase(expired_))
-			expired_ = getDefaultExpiredDate(current, Calendar.DAY_OF_YEAR, 364);
+			expired_ = getDefaultExpiredDate(current, 364);
 		expired = new ExpiredProperty(expired_);
 		
 		System.out.println("请输入服务器ip地址（多个用英文模式的逗号分隔开）：");

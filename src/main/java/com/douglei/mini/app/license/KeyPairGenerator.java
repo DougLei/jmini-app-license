@@ -5,7 +5,7 @@ import java.security.KeyPair;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-import com.douglei.tools.instances.file.writer.FileBufferedWriter;
+import com.douglei.tools.file.writer.FileBufferedWriter;
 
 /**
  * 公/私钥生成器

@@ -1,5 +1,6 @@
 package com.douglei.mini.app.license.file;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +18,12 @@ import com.douglei.mini.license.client.property.SignatureProperty;
  */
 public abstract class AbstractLicenseFile extends LicenseFile{
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String id;
+	private File file;
+	
+	protected AbstractLicenseFile(String id) {
+		this.id = id;
+	}
 	
 	/**
 	 * 获取授权文件类型
@@ -79,10 +86,12 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	}
 	
 	/**
-	 * 获取授权文件名
+	 * 获取授权文件
 	 * @return
 	 */
-	public String getFileName() {
-		return getType() + '.' + expired.getValue() + suffix;
+	public File getFile() {
+		if(file == null)
+			file = new File(System.getProperty("user.home") + File.separatorChar + ".license-app" + File.separatorChar + id + getType() + '.' + expired.getValue() + suffix);
+		return file;
 	}
 }

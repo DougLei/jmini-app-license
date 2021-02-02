@@ -13,6 +13,10 @@ import com.douglei.mini.license.client.property.StartProperty;
  */
 public class DEVLicenseFile extends AbstractLicenseFile {
 	
+	protected DEVLicenseFile(String id) {
+		super(id);
+	}
+
 	@Override
 	protected String getType() {
 		return "dev";

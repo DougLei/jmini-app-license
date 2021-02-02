@@ -17,6 +17,10 @@ import com.douglei.mini.license.client.property.StartProperty;
  */
 public class PRDLicenseFile extends AbstractLicenseFile {
 
+	protected PRDLicenseFile(String id) {
+		super(id);
+	}
+
 	@Override
 	protected String getType() {
 		return "prd";
@@ -24,14 +28,14 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 	
 	@Override
 	public void setOtherLimitInfo(Scanner scanner) {
-		System.out.println("\n下面开始录入授权文件中的其他信息，如果想跳过某个配置项，请输入skip（不区分大小写）并回车确认");
+		System.out.println("\n下面开始录入授权文件中的其他信息, 如果想跳过某个配置项, 请输入skip（不区分大小写）并回车确认");
 		System.out.println("---------------------------------");
 		
 		// 设置授权文件的起始日期
 		Date current = new Date();
 		start = new StartProperty(getStartDate(current));
 		
-		System.out.println("请输入授权文件的有效日期（yyyy-MM-dd）：");
+		System.out.println("请输入授权文件的有效截止日期（yyyy-MM-dd）：");
 		String expired_ = scanner.next();
 		if("skip".equalsIgnoreCase(expired_))
 			expired_ = getDefaultExpiredDate(current, Calendar.YEAR, 1);

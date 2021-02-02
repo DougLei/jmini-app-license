@@ -13,6 +13,10 @@ import com.douglei.mini.license.client.property.StartProperty;
  */
 public class TEMPLicenseFile extends AbstractLicenseFile {
 	
+	protected TEMPLicenseFile(String id) {
+		super(id);
+	}
+
 	@Override
 	protected String getType() {
 		return "temp";

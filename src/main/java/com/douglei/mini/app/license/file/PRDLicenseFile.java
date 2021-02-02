@@ -5,21 +5,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.douglei.mini.license.client.property.ExpiredProperty;
+import com.douglei.mini.license.client.property.ExpiredDateProperty;
 import com.douglei.mini.license.client.property.CustomProperty;
 import com.douglei.mini.license.client.property.IpProperty;
 import com.douglei.mini.license.client.property.MacProperty;
-import com.douglei.mini.license.client.property.StartProperty;
+import com.douglei.mini.license.client.property.EffectiveDateProperty;
 
 /**
  * 生产环境授权文件
  * @author DougLei
  */
 public class PRDLicenseFile extends AbstractLicenseFile {
-
-	protected PRDLicenseFile(String id) {
-		super(id);
-	}
 
 	@Override
 	protected String getType() {
@@ -33,13 +29,13 @@ public class PRDLicenseFile extends AbstractLicenseFile {
 		
 		// 设置授权文件的起始日期
 		Date current = new Date();
-		start = new StartProperty(getStartDate(current));
+		effectiveDate = new EffectiveDateProperty(getStartDate(current));
 		
 		System.out.println("请输入授权文件的有效截止日期（yyyy-MM-dd）：");
 		String expired_ = scanner.next();
 		if("skip".equalsIgnoreCase(expired_))
 			expired_ = getDefaultExpiredDate(current, Calendar.YEAR, 1);
-		expired = new ExpiredProperty(expired_);
+		expiredDate = new ExpiredDateProperty(expired_);
 		
 		System.out.println("请输入服务器ip地址（多个用英文模式的逗号分隔开）：");
 		String ip_ = scanner.next();

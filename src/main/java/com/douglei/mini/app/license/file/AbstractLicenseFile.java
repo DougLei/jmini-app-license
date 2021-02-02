@@ -18,12 +18,7 @@ import com.douglei.mini.license.client.property.SignatureProperty;
  */
 public abstract class AbstractLicenseFile extends LicenseFile{
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	private String id;
 	private File file;
-	
-	protected AbstractLicenseFile(String id) {
-		this.id = id;
-	}
 	
 	/**
 	 * 获取授权文件类型
@@ -73,8 +68,8 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	 */
 	public List<String> getContents(){
 		List<String> contents = new ArrayList<String>();
-		contents.add(start.getContent());
-		contents.add(expired.getContent());
+		contents.add(effectiveDate.getContent());
+		contents.add(expiredDate.getContent());
 		if(ip != null)
 			contents.add(ip.getContent());
 		if(mac != null)
@@ -91,7 +86,7 @@ public abstract class AbstractLicenseFile extends LicenseFile{
 	 */
 	public File getFile() {
 		if(file == null)
-			file = new File(System.getProperty("user.home") + File.separatorChar + ".license-app" + File.separatorChar + id + getType() + '.' + expired.getValue() + suffix);
+			file = new File(System.getProperty("user.home") + File.separatorChar + ".license-app" + File.separatorChar + getType() + '.' + expiredDate.getValue() + suffix);
 		return file;
 	}
 }
